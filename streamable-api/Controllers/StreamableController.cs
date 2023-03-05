@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace stremable_api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api")]
 public class StreamableController : ControllerBase
 {
 
@@ -20,10 +20,10 @@ public class StreamableController : ControllerBase
 
         Response.Headers.Add("Content-Type", "text/plain");
         Response.Headers.Add("Transfer-Encoding", "chunked"); // this is required to inform the client that you need to consume chunk by chunk
-
+        var random = new Random();
         for(var i=0; i <= 10; i++)
         {
-            var chunk = $"This is chunk id:{i} \n";
+            var chunk = $"This is chunk id:{random.Next(155,(i+1) * 2555)} \n";
 
             _logger.LogInformation($"Chunk count: {i}");
 
